@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniPulse | Campus Events Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#f2f3ff",
+            "on-surface-variant": "#464555",
+            "surface-tint": "#4d44e3",
+            "on-background": "#131b2e",
+            "primary-fixed": "#e2dfff",
+            "tertiary-container": "#006e4b",
+            "on-primary-fixed": "#0f0069",
+            "on-tertiary-fixed-variant": "#005236",
+            "surface": "#faf8ff",
+            "on-tertiary-fixed": "#002113",
+            "tertiary-fixed-dim": "#4edea3",
+            "on-tertiary-container": "#67f4b7",
+            "surface-variant": "#dae2fd",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "inverse-on-surface": "#eef0ff",
+            "on-error-container": "#93000a",
+            "surface-container": "#eaedff",
+            "on-secondary-fixed": "#07006c",
+            "on-primary-container": "#dad7ff",
+            "on-primary-fixed-variant": "#3323cc",
+            "outline": "#777587",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#fffbff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#2f2ebe",
+            "surface-container-highest": "#dae2fd",
+            "surface-bright": "#faf8ff",
+            "primary-fixed-dim": "#c3c0ff",
+            "secondary": "#4648d4",
+            "inverse-surface": "#283044",
+            "error": "#ba1a1a",
+            "tertiary": "#005338",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#e1e0ff",
+            "primary": "#3525cd",
+            "surface-dim": "#d2d9f4",
+            "inverse-primary": "#c3c0ff",
+            "secondary-fixed-dim": "#c0c1ff",
+            "on-secondary": "#ffffff",
+            "on-surface": "#131b2e",
+            "primary-container": "#4f46e5",
+            "background": "#faf8ff",
+            "outline-variant": "#c7c4d8",
+            "surface-container-high": "#e2e7ff",
+            "secondary-container": "#6063ee"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-2xl": "3rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-xl-mobile": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["30px", {"lineHeight": "38px", "fontWeight": "700"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "headline-xl-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "800"}],
+            "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "700"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+            "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+            "headline-xl": ["40px", {"lineHeight": "48px", "fontWeight": "800"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @layer base {
+      html {
+        overscroll-behavior: none;
+        scroll-behavior: smooth;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      }
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-variant shadow-sm" data-purpose="site-navigation">
+<div class="max-w-7xl mx-auto px-gutter">
+<div class="flex items-center justify-between h-20">
+<!-- Left: Brand / Campus Logo & Title -->
+<div class="flex items-center gap-space-xl">
+<a class="flex items-center gap-space-sm group" data-path="campus-event-management---desktop-webpage" data-purpose="brand-logo" href="#home">
+<div class="w-11 h-11 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-md shadow-primary-container/20 group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div>
+<div class="font-headline-sm text-on-surface flex items-center gap-space-xs leading-none">
+<span>Uni</span><span class="text-primary-container">Pulse</span>
+<span class="font-label-sm px-space-xs py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant ml-1">CAMPUS</span>
+</div>
+<p class="font-body-sm text-on-surface-variant leading-tight mt-0.5">Student Events &amp; Activities Hub</p>
+</div>
+</a>
+<!-- Middle Navigation Links -->
+<nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-1" data-active-classes="text-primary-container font-headline-sm bg-surface-container-low" data-purpose="nav-links">
+<a class="px-space-md py-space-sm font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="campus-event-management---desktop-webpage" href="#home">Home</a>
+<a class="px-space-md py-space-sm font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="events-&amp;-registration" href="#events">Events</a>
+<a class="px-space-md py-space-sm font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="campus-calendar" href="#calendar">Calendar</a>
+<a class="px-space-md py-space-sm font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="clubs-&amp;-societies" href="#clubs">Clubs</a>
+<a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors text-primary-container font-headline-sm bg-surface-container-low" data-path="submit-event" href="#submit-event">Submit Event</a>
+</nav>
+</div>
+<!-- Right Side: Search bar & Propose Event Action (Strictly NO login/sign-in buttons) -->
+<div class="flex items-center gap-space-md" data-purpose="header-actions">
+<div class="relative w-64 hidden lg:block">
+<input class="w-full font-body-sm pl-9 pr-space-md py-space-sm bg-surface-container-low border border-outline-variant rounded-full focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all text-on-surface placeholder-on-surface-variant" placeholder="Search concerts, hacks, talks..." type="text"/>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant absolute left-3 top-2.5 pointer-events-none">search</span>
+</div>
+<a class="inline-flex items-center gap-space-xs px-space-md py-space-sm bg-primary-container hover:bg-primary text-on-primary font-label-lg rounded-xl shadow-sm transition-all focus:ring-2 focus:ring-offset-2 focus:ring-primary-container" data-path="submit-event" href="#submit-event">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Submit Event</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="pt-20 min-h-screen"><div class="flex flex-col w-full">
+<!-- Portal Context Banner -->
+<section class="relative overflow-hidden bg-surface-container-high py-space-2xl px-gutter">
+<div class="absolute -right-20 -top-20 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute right-1/3 -bottom-24 w-80 h-80 bg-tertiary-fixed-dim/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="max-w-3xl space-y-space-xs">
+<div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-lowest text-primary font-label-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span>Academic Year 2025–2026 Facility Registry</span>
+</div>
+<h1 class="font-headline-xl text-on-surface tracking-tight">
+            Submit a Campus Event &amp; Reserve Facilities
+          </h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">
+            Streamlined approval pipeline for recognized student organizations, academic departments, and Greek life councils. Reserve venues, dispatch AV units, and schedule ticketing in one centralized clearance flow.
+          </p>
+</div>
+<!-- Metric Pill Counter -->
+<div class="flex items-center gap-space-md bg-surface-container-lowest p-space-md rounded-2xl shadow-sm self-start lg:self-auto">
+<div class="flex items-center gap-space-sm pr-space-md border-r-0">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div>
+<div class="font-headline-sm text-on-surface leading-none">48-72h</div>
+<div class="font-label-sm text-on-surface-variant mt-0.5">Average Turnaround</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm pl-space-xs">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">domain_verification</span>
+</div>
+<div>
+<div class="font-headline-sm text-on-surface leading-none">42 Venues</div>
+<div class="font-label-sm text-on-surface-variant mt-0.5">Live Sync Availability</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Workflow Workspace -->
+<div class="max-w-7xl mx-auto px-gutter py-space-2xl w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Primary Multi-Step Application Flow (8 cols) -->
+<form class="lg:col-span-8 flex flex-col gap-space-xl" id="event-submission-form" onsubmit="event.preventDefault(); window.handleEventSubmit();">
+<!-- Progress Tracker Bar -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between text-on-surface">
+<div>
+<span class="font-label-sm uppercase tracking-wider text-primary font-bold">Standard Submission Form</span>
+<h2 class="font-headline-md leading-tight">Club &amp; Facility Logistics Form</h2>
+</div>
+<span class="px-space-md py-1 bg-surface-container-high rounded-full font-label-md text-on-surface-variant font-bold">
+              Step <span id="current-step-display">1</span> of 6
+            </span>
+</div>
+<!-- Progress Stepper Bullets -->
+<div class="grid grid-cols-6 gap-space-xs pt-space-xs">
+<div class="h-1.5 rounded-full bg-primary-container transition-all" id="step-bar-1"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-all" id="step-bar-2"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-all" id="step-bar-3"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-all" id="step-bar-4"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-all" id="step-bar-5"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest transition-all" id="step-bar-6"></div>
+</div>
+</div>
+<!-- STEP 1: Organization & Contact Details -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg transition-all" id="section-step-1">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">1</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Organization &amp; Primary Contacts</h3>
+<p class="font-body-md text-on-surface-variant">Identify your chartered charter status and official liaisons for safety approval.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Club Selection -->
+<div class="md:col-span-2 space-y-1.5">
+<label class="font-label-lg text-on-surface flex items-center justify-between" for="org-select">
+<span>Recognized Student Organization / Faculty Unit <span class="text-error">*</span></span>
+<span class="font-label-sm text-tertiary font-normal">Chartered Tier 1 &amp; Tier 2 Clubs</span>
+</label>
+<div class="relative">
+<select class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm appearance-none cursor-pointer" id="org-select" required="">
+<option disabled="" selected="" value="">Select registered club or department</option>
+<option value="acm">ACM Student Chapter (School of Computing)</option>
+<option value="robotics">Robotics &amp; Autonomous Systems Club</option>
+<option value="fine-arts">Fine Arts &amp; Design Student Council</option>
+<option value="biotech">Biotech Society &amp; Pre-Med Alliance</option>
+<option value="ieee">IEEE Engineering Branch</option>
+<option value="debate">Campus Model UN &amp; Forensics Union</option>
+<option value="panhellenic">Panhellenic Council</option>
+<option value="athletics">Club Sports Executive Board</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Lead Organizer -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="organizer-name">Organizer / President Full Name <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="organizer-name" placeholder="e.g. Maya Chen" required="" type="text"/>
+</div>
+<!-- Student Email -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="organizer-email">University Email (.edu) <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="organizer-email" placeholder="mchen@campus.edu" required="" type="email"/>
+</div>
+<!-- Faculty Advisor -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="advisor-name">Faculty / Staff Advisor Name <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="advisor-name" placeholder="Dr. Julian Vance" required="" type="text"/>
+</div>
+<!-- Advisor Email -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="advisor-email">Advisor Campus Email <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="advisor-email" placeholder="jvance@faculty.campus.edu" required="" type="email"/>
+</div>
+</div>
+</fieldset>
+<!-- STEP 2: Event Details & Logistics -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg" id="section-step-2">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">2</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Event Details &amp; Crowd Scope</h3>
+<p class="font-body-md text-on-surface-variant">Craft your listing presentation and set projected participant sizes.</p>
+</div>
+</div>
+<div class="space-y-space-md pt-space-xs">
+<!-- Event Title -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="event-title">Event Title <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="event-title" placeholder="e.g. Annual HackSpring 2026 &amp; Hardware Showcase" required="" type="text"/>
+</div>
+<!-- Category Selector Pills -->
+<div class="space-y-2">
+<label class="font-label-lg text-on-surface block">Primary Classification Tag <span class="text-error">*</span></label>
+<div class="flex flex-wrap gap-space-sm" id="category-picker">
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-primary-container text-on-primary shadow-sm transition-all" data-category="Tech" type="button">
+                  Technology &amp; Hackathon
+                </button>
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" data-category="Cultural" type="button">
+                  Arts &amp; Cultural Fest
+                </button>
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" data-category="Workshop" type="button">
+                  Skill Workshop / Seminar
+                </button>
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" data-category="Career" type="button">
+                  Career Fair &amp; Networking
+                </button>
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" data-category="Sports" type="button">
+                  Athletics &amp; Esports
+                </button>
+<button class="category-pill px-space-md py-space-xs rounded-full font-label-md bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" data-category="Social" type="button">
+                  Student Social Mixer
+                </button>
+</div>
+</div>
+<!-- Tagline -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="event-tagline">Short Punchy Tagline <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="event-tagline" maxlength="120" placeholder="48 hours of collaborative hardware hacking, prizes, and keynote talks." type="text"/>
+<p class="font-body-sm text-on-surface-variant text-right">Max 120 characters</p>
+</div>
+<!-- Full Description -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="event-desc">Comprehensive Event Schedule &amp; Purpose <span class="text-error">*</span></label>
+<textarea class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="event-desc" placeholder="Detail the agenda, visiting guest speakers, participant prerequisites, safety briefings, and check-in procedures..." rows="4"></textarea>
+</div>
+<!-- Attendance Capacity Slider Component -->
+<div class="bg-surface-container-low p-space-lg rounded-xl space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<label class="font-label-lg text-on-surface" for="capacity-range">Projected Student Attendance</label>
+<p class="font-body-sm text-on-surface-variant">Drives fire marshal density and venue compatibility checks.</p>
+</div>
+<div class="text-right">
+<span class="font-headline-lg text-primary" id="capacity-value">250</span>
+<span class="font-label-md text-on-surface-variant block">Students Expected</span>
+</div>
+</div>
+<!-- Interactive Range -->
+<input class="w-full accent-primary cursor-pointer h-2 bg-surface-container-highest rounded-lg" id="capacity-range" max="1200" min="20" oninput="document.getElementById('capacity-value').innerText = this.value; document.getElementById('summary-capacity').innerText = this.value + ' attendees';" step="10" type="range" value="250"/>
+<div class="flex justify-between font-label-sm text-on-surface-variant pt-1">
+<span>Small Workshop (20)</span>
+<span>Auditorium Tier (400)</span>
+<span>Campus Festival (1200+)</span>
+</div>
+</div>
+</div>
+</fieldset>
+<!-- STEP 3: Date, Time & Venue Selection -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg" id="section-step-3">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">3</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Time Window &amp; Facility Reservation</h3>
+<p class="font-body-md text-on-surface-variant">Lock down venue slots and designate a backup space if overflow occurs.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Start Time -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="start-datetime">Event Start Date &amp; Time <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="start-datetime" required="" type="datetime-local"/>
+</div>
+<!-- End Time -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="end-datetime">Event Conclusion Date &amp; Time <span class="text-error">*</span></label>
+<input class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="end-datetime" required="" type="datetime-local"/>
+</div>
+<!-- Primary Venue -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface flex items-center justify-between" for="primary-venue">
+<span>Primary Facility Choice <span class="text-error">*</span></span>
+<span class="font-label-sm text-tertiary">Real-Time Available</span>
+</label>
+<div class="relative">
+<select class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm appearance-none cursor-pointer" id="primary-venue" onchange="document.getElementById('summary-venue').innerText = this.options[this.selectedIndex].text;" required="">
+<option disabled="" selected="" value="">Choose campus space</option>
+<option value="sic">Student Innovation Complex (Cap: 450)</option>
+<option value="quad">Main Quadrangle Open Amphitheater (Cap: 1,200)</option>
+<option value="turing">Turing Memorial Hall - Room 101 (Cap: 280)</option>
+<option value="eng-lab">Engineering Wing Maker Lab (Cap: 75)</option>
+<option value="union">Student Union Grand Ballroom (Cap: 600)</option>
+<option value="blackbox">Performing Arts Blackbox Theater (Cap: 150)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none text-on-surface-variant">domain</span>
+</div>
+</div>
+<!-- Backup Venue -->
+<div class="space-y-1.5">
+<label class="font-label-lg text-on-surface" for="backup-venue">Alternate / Backup Facility</label>
+<div class="relative">
+<select class="w-full font-body-md px-space-md py-space-sm bg-surface-container-low text-on-surface rounded-xl focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm appearance-none cursor-pointer" id="backup-venue">
+<option selected="" value="">Select backup contingency space</option>
+<option value="turing-alt">Turing Memorial Hall - North Wing (Cap: 200)</option>
+<option value="sic-alt">SIC Atrium &amp; Exhibition Lounge (Cap: 300)</option>
+<option value="multipurpose">Campus Rec Multipurpose Arena 2 (Cap: 500)</option>
+<option value="library-collab">University Library Collaboration Commons (Cap: 120)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 pointer-events-none text-on-surface-variant">home_work</span>
+</div>
+</div>
+</div>
+<!-- Live Venue Preview Snippet -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">info</span>
+<p class="font-body-sm text-on-surface">
+                Venues reserved through UniPulse automatically hold a <strong>60-minute buffer window</strong> before and after for setup and tear-down crews.
+              </p>
+</div>
+<a class="font-label-sm text-primary hover:underline whitespace-nowrap pl-space-sm" href="#calendar">Check Floorplans</a>
+</div>
+</fieldset>
+<!-- STEP 4: Facility & Tech Requirements -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg" id="section-step-4">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">4</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Technical Units &amp; University Services</h3>
+<p class="font-body-md text-on-surface-variant">Check equipment or personnel required from Campus Operations.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+<!-- Tech Requirement Card 1 -->
+<label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="mt-1 w-5 h-5 rounded-md text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<div>
+<span class="font-headline-sm text-sm text-on-surface block">A/V Projector &amp; Stage Sound System</span>
+<span class="font-body-sm text-on-surface-variant">Includes dual wireless microphones, podium XLR lines, and HDMI/USB-C switcher.</span>
+</div>
+</label>
+<!-- Tech Requirement Card 2 -->
+<label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input class="mt-1 w-5 h-5 rounded-md text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<div>
+<span class="font-headline-sm text-sm text-on-surface block">Live Streaming &amp; Hybrid Camera Rig</span>
+<span class="font-body-sm text-on-surface-variant">Dedicated 1080p pan-tilt camera with Student Affairs YouTube &amp; Twitch broadcast relay.</span>
+</div>
+</label>
+<!-- Tech Requirement Card 3 -->
+<label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="mt-1 w-5 h-5 rounded-md text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<div>
+<span class="font-headline-sm text-sm text-on-surface block">Stage Setup, Rostrum &amp; Folding Chairs</span>
+<span class="font-body-sm text-on-surface-variant">Facilities will configure standard seating arrangement according to registered layout.</span>
+</div>
+</label>
+<!-- Tech Requirement Card 4 -->
+<label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors">
+<input class="mt-1 w-5 h-5 rounded-md text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<div>
+<span class="font-headline-sm text-sm text-on-surface block">Campus Safety &amp; Night Escort Officers</span>
+<span class="font-body-sm text-on-surface-variant">Mandatory for events exceeding 300 guests or extending past 10:00 PM on weeknights.</span>
+</div>
+</label>
+<!-- Tech Requirement Card 5 -->
+<label class="flex items-start gap-space-sm p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container cursor-pointer transition-colors md:col-span-2">
+<input class="mt-1 w-5 h-5 rounded-md text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<div>
+<span class="font-headline-sm text-sm text-on-surface block">Catering, Food Warming &amp; Zero-Waste Disposal</span>
+<span class="font-body-sm text-on-surface-variant">Pre-approval for non-campus food vendors or campus catering services, plus compost bins.</span>
+</div>
+</label>
+</div>
+</fieldset>
+<!-- STEP 5: Media & Promotional Assets -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg" id="section-step-5">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">5</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Event Banner &amp; Digital Signage</h3>
+<p class="font-body-md text-on-surface-variant">Upload visual collateral for the campus mobile app and quad digital kiosks.</p>
+</div>
+</div>
+<div class="space-y-space-md pt-space-xs">
+<!-- Drag and Drop Dropzone -->
+<div class="relative bg-surface-container-low rounded-2xl p-space-xl flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container transition-all group">
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" id="banner-file-input" onchange="window.previewBanner(event)" type="file"/>
+<div class="w-16 h-16 rounded-2xl bg-surface-container-lowest flex items-center justify-center text-primary group-hover:scale-105 transition-transform shadow-sm mb-space-sm">
+<span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+</div>
+<p class="font-headline-sm text-on-surface">Click to browse or drag high-res artwork here</p>
+<p class="font-body-sm text-on-surface-variant max-w-sm mt-1">
+                Accepted: PNG, JPG, or WEBP. Recommended resolution: <strong>1920 × 1080px (16:9)</strong>. Max file size: 10 MB.
+              </p>
+</div>
+<!-- Visual Preview Card with Placeholder Pipeline -->
+<div class="space-y-2" id="banner-preview-box">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-on-surface-variant">Live Hub Banner Display Preview</span>
+<span class="font-label-sm text-tertiary">Landscape Display Preset</span>
+</div>
+<div class="relative rounded-2xl overflow-hidden shadow-sm h-48 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Vibrant collegiate technology showcase poster with modern purple and emerald accent lighting, student developers collaborating near robotics and interactive digital displays in a high-tech academic auditorium, ultra-crisp modern event banner" id="banner-preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa_hNG56FhVC3M9cl8k0HcboXkTbejgm1G2nturDY3kl5_bW6DE0aA_d4SyU0EQZVnapwXRCCk7QnCKBYXx_n555Uby1TXLEuKm-LY46HQrKDCA4k5DQqJqhr1COZbSI8562mowyjFkn00he2MwC22AGNh9zo0orIMNmqS8R_Jw4nWicNGhaVJ8M4NhKxbtCHdxPDhoSEwlY6exrByR3fx5FYVio9tmT3bD9ATDNOK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/80 via-transparent to-transparent flex items-end p-space-md">
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary font-label-sm">Preview Card</span>
+<p class="font-headline-sm text-white mt-1">HackSpring 2026: Campus Tech Odyssey</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</fieldset>
+<!-- STEP 6: Budget & Ticket Tier Setting -->
+<fieldset class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-lg" id="section-step-6">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-sm">6</div>
+<div>
+<h3 class="font-headline-md text-on-surface">Ticketing Structure &amp; Fee Policy</h3>
+<p class="font-body-md text-on-surface-variant">Designate participant access rules according to Student Life bylaws.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs" id="ticket-tiers-wrapper">
+<!-- Tier 1: Free -->
+<label class="ticket-card relative flex flex-col p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer shadow-sm">
+<input checked="" class="sr-only" name="ticket-type" onchange="window.selectTier('free')" type="radio" value="free"/>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+</span>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-tertiary-container text-on-tertiary font-bold">Recommended</span>
+</div>
+<h4 class="font-headline-sm text-on-surface">Free General Access</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 mb-space-md flex-grow">All valid university ID holders may register free of charge.</p>
+<div class="pt-space-sm border-t-0 font-label-md text-primary font-bold">Standard Single Sign-On RSVP</div>
+</label>
+<!-- Tier 2: Ticketed w/ ID Quota -->
+<label class="ticket-card relative flex flex-col p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer shadow-sm">
+<input class="sr-only" name="ticket-type" onchange="window.selectTier('quota')" type="radio" value="quota"/>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</span>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant">Allocated</span>
+</div>
+<h4 class="font-headline-sm text-on-surface">Student ID Quota</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 mb-space-md flex-grow">Restricted to 1 ticket per verified student number with guest limit.</p>
+<div class="pt-space-sm border-t-0 font-label-md text-on-surface-variant font-bold">Controlled Seat Allotment</div>
+</label>
+<!-- Tier 3: Paid Admission -->
+<label class="ticket-card relative flex flex-col p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all cursor-pointer shadow-sm">
+<input class="sr-only" name="ticket-type" onchange="window.selectTier('paid')" type="radio" value="paid"/>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface font-bold">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+</span>
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container">Audit Req.</span>
+</div>
+<h4 class="font-headline-sm text-on-surface">Paid Entry Ticket</h4>
+<p class="font-body-sm text-on-surface-variant mt-1 mb-space-md flex-grow">Subsidized fee for non-students or materials-heavy conferences.</p>
+<div class="pt-space-sm border-t-0 font-label-md text-on-surface-variant font-bold">University Bursar Clearing</div>
+</label>
+</div>
+<!-- Dynamic Tier Note -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-sm" id="tier-notification-box">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">verified</span>
+<div class="font-body-sm text-on-surface">
+<strong class="font-semibold text-on-surface">Free Student Admission Selected:</strong> No financial audit or merchant account setup required. Registrations sync directly to the UniPulse student attendance ledger.
+            </div>
+</div>
+</fieldset>
+<!-- Final Confirmation Banner -->
+<div class="bg-primary-container text-on-primary p-space-xl rounded-2xl shadow-md flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="space-y-1">
+<h3 class="font-headline-md text-white">Ready for Administrative Review?</h3>
+<p class="font-body-md text-primary-fixed text-sm">
+              Ensure your faculty advisor has received notice. Both student affairs and venue scheduling will review your file.
+            </p>
+</div>
+<button class="px-space-xl py-space-md bg-white hover:bg-surface text-primary font-headline-sm text-sm rounded-xl shadow-md transition-all whitespace-nowrap" type="submit">
+            Submit for University Review
+          </button>
+</div>
+</form>
+<!-- Sticky Sidebar: Submission Overview, Checklist & SLA (4 cols) -->
+<aside class="lg:col-span-4 lg:sticky lg:top-28 flex flex-col gap-space-lg">
+<!-- Live Submission Summary Card -->
+<div class="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-on-surface">Submission Overview</h3>
+<span class="font-label-sm px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold">Ready</span>
+</div>
+<!-- Real-Time Data Summary List -->
+<div class="space-y-space-sm font-body-sm pt-space-xs text-on-surface">
+<div class="flex items-center justify-between py-1 border-b-0">
+<span class="text-on-surface-variant">Charter Status:</span>
+<span class="font-semibold text-right" id="summary-org">ACM Student Chapter</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b-0">
+<span class="text-on-surface-variant">Venue Selected:</span>
+<span class="font-semibold text-right text-primary truncate max-w-[180px]" id="summary-venue">Student Innovation Complex</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b-0">
+<span class="text-on-surface-variant">Capacity Scope:</span>
+<span class="font-semibold text-right" id="summary-capacity">250 attendees</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b-0">
+<span class="text-on-surface-variant">Ticketing Mode:</span>
+<span class="font-semibold text-right" id="summary-tier">Free Admission</span>
+</div>
+</div>
+<!-- Approval Pipeline Indicator -->
+<div class="bg-surface-container-low p-space-md rounded-xl space-y-space-xs">
+<div class="flex items-center justify-between font-label-md">
+<span class="text-on-surface font-bold">Estimated SLA Window</span>
+<span class="text-primary font-bold">48 - 72 Hours</span>
+</div>
+<!-- Progress Line Indicator -->
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden mt-1">
+<div class="bg-primary h-full rounded-full w-1/3"></div>
+</div>
+<p class="font-body-sm text-on-surface-variant text-[11px] leading-tight pt-1">
+              Reviewed concurrently by Student Affairs Office and Facilities Operations.
+            </p>
+</div>
+<!-- Prerequisites Checklist -->
+<div class="space-y-2 pt-space-xs">
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider block">Compliance Prerequisites</span>
+<div class="flex items-center gap-space-xs font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<span>Faculty Advisor Sign-Off Pending</span>
+</div>
+<div class="flex items-center gap-space-xs font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<span>Campus Safety &amp; Fire Marshall Clearance</span>
+</div>
+<div class="flex items-center gap-space-xs font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">check_circle</span>
+<span>Student Council Budget Clearance</span>
+</div>
+</div>
+<!-- Action CTA Group -->
+<div class="flex flex-col gap-space-sm pt-space-md">
+<button class="w-full py-space-sm px-space-md bg-primary hover:bg-primary-container text-on-primary font-label-lg rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-space-xs" onclick="document.getElementById('event-submission-form').requestSubmit();" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+<span>Submit for University Review</span>
+</button>
+<button class="w-full py-space-sm px-space-md bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg rounded-xl transition-all flex items-center justify-center gap-space-xs" onclick="window.saveDraftModal();" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span>Save Application as Draft</span>
+</button>
+</div>
+</div>
+<!-- Student Affairs Contact & Live Desk Support -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm space-y-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-sm text-on-surface">Student Scheduling Office</h4>
+<p class="font-body-sm text-on-surface-variant text-xs">Division of Student Life</p>
+</div>
+</div>
+<div class="text-on-surface font-body-sm space-y-1 pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">location_on</span>
+<span>Student Union Building, Suite 304</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">call</span>
+<span>(555) 019-2834 (Ext. 402)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">schedule</span>
+<span>Mon–Fri: 8:30 AM – 5:00 PM EST</span>
+</div>
+</div>
+<div class="pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-sm text-primary hover:underline" href="mailto:events-support@campus.edu">
+<span>Open Facilities Urgent Inquiry</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+<!-- Submission Toast Notification -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-inverse-surface text-inverse-on-surface p-space-md rounded-2xl shadow-2xl flex items-center gap-space-md max-w-md" id="toast-message">
+<div class="w-10 h-10 rounded-xl bg-tertiary flex items-center justify-center text-on-tertiary">
+<span class="material-symbols-outlined">mark_email_read</span>
+</div>
+<div>
+<h5 class="font-headline-sm text-sm text-white">Application Dispatched</h5>
+<p class="font-body-sm text-surface-variant text-xs mt-0.5">Reference ID: #EV-2026-8819 sent to your university email.</p>
+</div>
+</div>
+<!-- Interactive Form Controller Script -->
+<script>
+    // Live category selection
+    document.querySelectorAll('.category-pill').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.category-pill').forEach(b => {
+          b.classList.remove('bg-primary-container', 'text-on-primary', 'shadow-sm');
+          b.classList.add('bg-surface-container', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container', 'text-on-surface-variant');
+        this.classList.add('bg-primary-container', 'text-on-primary', 'shadow-sm');
+      });
+    });
+
+    // Step tracker on scroll interaction
+    const steps = [1, 2, 3, 4, 5, 6];
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY + 250;
+      steps.forEach(i => {
+        const el = document.getElementById('section-step-' + i);
+        if (el && el.offsetTop <= scrollPos) {
+          document.getElementById('current-step-display').innerText = i;
+          for (let j = 1; j <= 6; j++) {
+            const bar = document.getElementById('step-bar-' + j);
+            if (bar) {
+              if (j <= i) {
+                bar.classList.remove('bg-surface-container-highest');
+                bar.classList.add('bg-primary-container');
+              } else {
+                bar.classList.add('bg-surface-container-highest');
+                bar.classList.remove('bg-primary-container');
+              }
+            }
+          }
+        }
+      });
+    });
+
+    // Tier selection styling
+    window.selectTier = function(tier) {
+      const summaryTier = document.getElementById('summary-tier');
+      const noteBox = document.getElementById('tier-notification-box');
+      if (tier === 'free') {
+        summaryTier.innerText = 'Free Admission';
+        noteBox.innerHTML = `
+          <span class="material-symbols-outlined text-primary text-[20px] mt-0.5">verified</span>
+          <div class="font-body-sm text-on-surface">
+            <strong class="font-semibold text-on-surface">Free Student Admission Selected:</strong> No financial audit or merchant account setup required. Registrations sync directly to the UniPulse student attendance ledger.
+          </div>
+        `;
+      } else if (tier === 'quota') {
+        summaryTier.innerText = 'ID Quota System';
+        noteBox.innerHTML = `
+          <span class="material-symbols-outlined text-primary text-[20px] mt-0.5">badge</span>
+          <div class="font-body-sm text-on-surface">
+            <strong class="font-semibold text-on-surface">Student ID Quota Active:</strong> UniPulse will enforce strict single-ticket registration tied to verified university identity tokens.
+          </div>
+        `;
+      } else if (tier === 'paid') {
+        summaryTier.innerText = 'Paid Ticket Tier';
+        noteBox.innerHTML = `
+          <span class="material-symbols-outlined text-error text-[20px] mt-0.5">priority_high</span>
+          <div class="font-body-sm text-on-surface">
+            <strong class="font-semibold text-on-surface">Paid Entry Mode:</strong> Requires university bursar merchant clearance. Student Accounts will contact you for deposit fund code mapping.
+          </div>
+        `;
+      }
+    };
+
+    // Live update for organization
+    const orgSelect = document.getElementById('org-select');
+    if (orgSelect) {
+      orgSelect.addEventListener('change', function() {
+        document.getElementById('summary-org').innerText = this.options[this.selectedIndex].text.split('(')[0];
+      });
+    }
+
+    // Banner file upload preview helper
+    window.previewBanner = function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('banner-preview-img');
+          if (img) img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // Handle toast notification
+    function triggerToast(title, subtitle) {
+      const toast = document.getElementById('toast-message');
+      if (toast) {
+        if (title) toast.querySelector('h5').innerText = title;
+        if (subtitle) toast.querySelector('p').innerText = subtitle;
+        toast.classList.remove('translate-y-32', 'opacity-0');
+        setTimeout(() => {
+          toast.classList.add('translate-y-32', 'opacity-0');
+        }, 4000);
+      }
+    }
+
+    window.saveDraftModal = function() {
+      triggerToast('Application Saved as Draft', 'Your event data was stored in local campus state for 14 days.');
+    };
+
+    window.handleEventSubmit = function() {
+      triggerToast('Event Dispatched for Review', 'Reference #EV-2026-8819 logged. Routing to Student Affairs & Scheduling.');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 500);
+    };
+  </script>
+</div></main>
+<!-- BEGIN: CampusFooter -->
+<footer class="bg-inverse-surface text-inverse-on-surface font-body-sm border-t border-inverse-surface/80" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto px-gutter py-space-2xl">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-xl">
+<!-- Brand Info -->
+<div class="col-span-2 md:col-span-1 space-y-space-sm">
+<div class="flex items-center gap-space-xs text-on-primary font-headline-sm">
+<div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-label-md">U</div>
+<span>UniPulse Hub</span>
+</div>
+<p class="font-body-sm text-surface-variant leading-normal">
+            The official event scheduling &amp; student engagement portal maintained by Student Affairs &amp; Campus Council.
+          </p>
+<div class="font-label-sm text-outline-variant">
+            Emergency Security Desk: +1 (555) 019-2834
+          </div>
+</div>
+<!-- Quick Links -->
+<div>
+<p class="font-label-lg text-on-primary uppercase tracking-wider mb-space-sm">Navigation</p>
+<ul class="space-y-space-xs">
+<li><a class="hover:text-surface-bright transition-colors" data-path="campus-event-management---desktop-webpage" href="#home">Home Showcase</a></li>
+<li><a class="hover:text-surface-bright transition-colors" data-path="events-&amp;-registration" href="#events">Events &amp; Registration</a></li>
+<li><a class="hover:text-surface-bright transition-colors" data-path="campus-calendar" href="#calendar">Semester Calendar</a></li>
+<li><a class="hover:text-surface-bright transition-colors" data-path="clubs-&amp;-societies" href="#clubs">Clubs &amp; Societies</a></li>
+<li><a class="hover:text-surface-bright transition-colors" data-path="submit-event" href="#submit-event">Submit New Event</a></li>
+</ul>
+</div>
+<!-- Student Resources -->
+<div>
+<p class="font-label-lg text-on-primary uppercase tracking-wider mb-space-sm">Resources</p>
+<ul class="space-y-space-xs">
+<li><a class="hover:text-surface-bright transition-colors" href="#">Event Submission Policy</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">AV &amp; Tech Gear Rentals</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Safety &amp; Crowd Protocol</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Food &amp; Catering Guidelines</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Accessibility Accommodations</a></li>
+</ul>
+</div>
+<!-- University Links -->
+<div>
+<p class="font-label-lg text-on-primary uppercase tracking-wider mb-space-sm">University Services</p>
+<ul class="space-y-space-xs">
+<li><a class="hover:text-surface-bright transition-colors" href="#">Office of Student Affairs</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Campus Recreation Center</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">University Library System</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Dining &amp; Student Union</a></li>
+<li><a class="hover:text-surface-bright transition-colors" href="#">Campus Security &amp; Escorts</a></li>
+</ul>
+</div>
+</div>
+<!-- Footer Bottom Copyright Bar -->
+<div class="mt-space-2xl pt-space-md border-t border-on-surface-variant/20 flex flex-col sm:flex-row items-center justify-between font-label-sm text-outline-variant gap-space-sm">
+<p>© 2026 UniPulse Campus Events Hub. All rights reserved. Division of Student Life.</p>
+<div class="flex items-center space-x-space-lg">
+<a class="hover:text-surface-bright" href="#">Student Code of Conduct</a>
+<a class="hover:text-surface-bright" href="#">Privacy Policy</a>
+<a class="hover:text-surface-bright" href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: CampusFooter -->
+</body></html>

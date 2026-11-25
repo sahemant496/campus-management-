@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniPulse | Campus Events</title>
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav-shell">
+      <a class="brand" href="#home" aria-label="UniPulse home">
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span>
+          <strong>Uni<span>Pulse</span></strong>
+          <small>Student Events &amp; Activities Hub</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#home" data-nav="home">Home</a>
+        <a href="#events" data-nav="events">Events</a>
+        <a href="#submit" data-nav="submit">Submit Event</a>
+      </nav>
+      <div class="nav-actions">
+        <label class="search-box" aria-label="Search events">
+          <span aria-hidden="true">⌕</span>
+          <input id="global-search" type="search" placeholder="Search events..." />
+        </label>
+        <button class="icon-menu" id="menu-button" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <div>
+        <a class="brand brand-footer" href="#home">
+          <span class="brand-mark">U</span>
+          <span><strong>Uni<span>Pulse</span></strong></span>
+        </a>
+        <p>The official event scheduling and student engagement portal.</p>
+      </div>
+      <div><strong>Explore</strong><a href="#events">Upcoming Events</a><a href="#submit">Submit Event</a></div>
+      <div><strong>University Services</strong><a href="#events">Student Affairs</a><a href="#events">Campus Recreation</a></div>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <dialog class="modal" id="registration-modal">
+    <form method="dialog" id="registration-form">
+      <button class="modal-close" value="cancel" aria-label="Close">×</button>
+      <p class="eyebrow">Student registration</p>
+      <h2 id="registration-title">Reserve your spot</h2>
+      <p class="muted">The API requires a valid Supabase user UUID.</p>
+      <label>
+        User UUID
+        <input id="user-id" name="user_id" required placeholder="00000000-0000-0000-0000-000000000000" />
+      </label>
+      <p class="form-error" id="registration-error" hidden></p>
+      <button class="button primary full" id="confirm-registration" type="submit">Confirm registration</button>
+    </form>
+  </dialog>
+
+  <script src="./app.js"></script>
+</body>
+</html>

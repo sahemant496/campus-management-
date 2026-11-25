@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniPulse | Campus Events Hub</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            },
+            accent: {
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              violet: '#8b5cf6',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Stylesheets -->
+<style data-purpose="custom-enhancements">
+    /* Subtle background grid pattern for modern university look */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    }
+    /* Smooth card hover lift transition */
+    .event-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+<!-- END: Custom Stylesheets -->
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col antialiased">
+<!-- BEGIN: MainHeader -->
+<!-- Top Navigation Header matching the wireframe sketch top bar layout -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm" data-purpose="site-navigation">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<!-- Left: Brand / Campus Logo & Title -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 group" data-purpose="brand-logo" href="#">
+<div class="w-11 h-11 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-500/25 group-hover:bg-brand-700 transition-colors">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<span class="text-xl font-black tracking-tight text-slate-900 flex items-center gap-1">
+                Uni<span class="text-brand-600">Pulse</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 font-semibold tracking-normal">CAMPUS</span>
+</span>
+<p class="text-xs text-slate-600 font-medium">Student Events &amp; Activities Hub</p>
+</div>
+</a>
+<!-- Middle Navigation Links matching sketch: Home | Event | About -->
+<nav aria-label="Main Navigation" class="hidden md:flex items-center space-x-1">
+<a aria-current="page" class="px-3 py-2 text-sm font-semibold text-brand-600 bg-brand-50 rounded-lg" href="#home">Home</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors" href="#events">Events</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors" href="#about">About</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors" href="#calendar">Calendar</a>
+<a class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors" href="#clubs">Clubs &amp; Societies</a>
+</nav>
+</div>
+<!-- Right Side: Search bar & Propose Event Action (Replaces Sign In / Sign Up as requested) -->
+<div class="flex items-center gap-3" data-purpose="header-actions">
+<div class="relative w-64 hidden lg:block">
+<input class="w-full text-xs pl-9 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-full focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all text-slate-700 placeholder-slate-400" placeholder="Search concerts, hacks, talks..." type="text"/>
+<svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<a class="inline-flex items-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-offset-2 focus:ring-brand-500" href="#submit-event">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Submit Event</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="flex-grow">
+<!-- BEGIN: HeroSection -->
+<!-- Major Featured Showcase Block corresponding to the upper block in the wireframe -->
+<section class="relative bg-gradient-to-b from-brand-50/70 via-white to-slate-50 border-b border-slate-200 py-12 lg:py-16 bg-grid-pattern" data-purpose="hero-showcase" id="home">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Hero Header Intro -->
+<div class="text-center max-w-3xl mx-auto mb-10">
+<span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-brand-100 text-brand-700 mb-3 border border-brand-200">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Spring Semester 2026 Event Calendar Live
+          </span>
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Discover What's Happening <span class="text-brand-600 underline decoration-brand-300 underline-offset-4">Across Campus</span>
+</h1>
+<p class="mt-3 text-base text-slate-600 leading-relaxed">
+            From premier collegiate hackathons and symphony nights to career symposiums and athletic showdowns. Stay connected with campus life.
+          </p>
+</div>
+<!-- Featured Event Showcase Card (Wireframe Top Box) -->
+<div class="bg-white rounded-2xl shadow-xl border border-slate-200/80 overflow-hidden" data-purpose="featured-event-banner">
+<div class="grid grid-cols-1 lg:grid-cols-12">
+<!-- Featured Visual Banner -->
+<div class="lg:col-span-7 relative min-h-[300px] lg:min-h-[420px] bg-slate-900 flex items-end p-6 lg:p-8">
+<img alt="Annual University Tech &amp; Innovation Gala" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBj3z4vaVs9v8afSZOi6Sw4UgPN8j9PH6rCsXXtNesKjUPKvWx6gwsMTQFe0Hdk5n92hyZvX3MOodErWQ9BdIVncTAFJKW6vPCyZZoZg_zrsQUFhbZPevDiLvqgiomx3xkyvRGS7z3uc3ZpnLCEp3NsA8RiKl3DcpWTEkbI8JjxSILd5gR3VhWz9ps1Wq6aXoA4RdJN1IgjFrZD2AzPj3pOP3PlqVKb4QCJF68DRnv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+<!-- Floating Highlight Details -->
+<div class="relative z-10 text-white">
+<div class="flex flex-wrap items-center gap-2 mb-3">
+<span class="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Featured Flagship</span>
+<span class="bg-emerald-500/90 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full backdrop-blur">Registration Open</span>
+</div>
+<h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-snug">
+                  Apex 2026: Inter-University Innovation &amp; Hackathon Summit
+                </h2>
+<p class="text-slate-300 text-sm mt-2 line-clamp-2 max-w-xl">
+                  36 hours of relentless creation, $25,000 in grand prize pools, mentorship from leading Silicon Valley engineers, and student founders.
+                </p>
+<div class="flex items-center gap-4 mt-4 text-xs font-medium text-slate-200">
+<span class="flex items-center gap-1.5">
+<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    March 18-20, 2026
+                  </span>
+<span class="flex items-center gap-1.5">
+<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Student Innovation Complex, Hall A
+                  </span>
+</div>
+</div>
+</div>
+<!-- Event Registration & Key Stats Side Panel -->
+<div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-white">
+<div>
+<div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+<div>
+<span class="text-xs uppercase tracking-wider text-slate-600 font-semibold">Organized By</span>
+<p class="text-sm font-bold text-slate-900">Faculty of Computing &amp; ACM Chapter</p>
+</div>
+<div class="text-right">
+<span class="text-xs uppercase tracking-wider text-slate-600 font-semibold">Entry Pass</span>
+<p class="text-sm font-extrabold text-brand-600">Free with Student ID</p>
+</div>
+</div>
+<!-- Registration Capacity Counter -->
+<div class="space-y-2 mb-6">
+<div class="flex justify-between text-xs font-semibold text-slate-700">
+<span>Capacity Filled</span>
+<span class="text-brand-600 font-bold">482 / 600 Registered</span>
+</div>
+<div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+<div class="bg-brand-600 h-2.5 rounded-full" style="width: 80.3%"></div>
+</div>
+<p class="text-xs text-amber-600 font-medium flex items-center gap-1">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Hurry! Only 118 seats remaining before waitlist opens.
+                  </p>
+</div>
+<!-- Key Highlights List -->
+<ul class="space-y-2 text-xs text-slate-600 mb-6">
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Hardware lab access, cloud compute credits, &amp; 24/7 catering
+                  </li>
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Direct internship interviews with partner tech sponsors
+                  </li>
+<li class="flex items-start gap-2">
+<svg class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    Official certificate of participation accredited for academic credits
+                  </li>
+</ul>
+</div>
+<!-- Action buttons -->
+<div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+<a class="flex-1 text-center py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-md shadow-brand-500/20 transition-all" href="#rsvp">
+                  Reserve Student Spot
+                </a>
+<a class="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition-colors text-center" href="#event-details">
+                  Full Schedule
+                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: EventCatalogSection -->
+<!-- Main Events Grid and Filter section corresponding to the second wireframe card box -->
+<section class="py-14 bg-slate-50" data-purpose="event-catalog" id="events">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Section Heading & Filter Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200 gap-4">
+<div>
+<div class="flex items-center gap-2 text-brand-600 font-bold text-xs uppercase tracking-wider">
+<span>Campus Directory</span>
+<span class="text-slate-300">•</span>
+<span>All Venues</span>
+</div>
+<h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Upcoming Events &amp; Assemblies</h2>
+</div>
+<!-- Filter Category Pills -->
+<div class="flex flex-wrap items-center gap-2" data-purpose="category-filters">
+<button class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-brand-600 text-white shadow-sm">All Events</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors">Tech &amp; Coding</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors">Cultural &amp; Arts</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors">Workshops</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors">Athletics</button>
+<button class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors">Guest Talks</button>
+</div>
+</div>
+<!-- 6-Grid Event Cards Section -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-purpose="event-card-grid">
+<!-- Event Card 1: Cultural Fest -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="Campus Spring Cultural Fest" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgOEd_YFX196pPb2YG8emHUteVrhTSn5gLkmQpKUJNaRwrYxeiaYlnMp1asqCRZJHmRY6SAC5zfSUtpdk6cgUoyL8IwGA9afB7TQ8YSj_mNsLyOzf-tej9zh6E--5MT0xx8QGXW9aZoNjBB39m-HaPu4MnWpvq2isvdXm15iK5eH_fBwp28IIpg_URhEAjV_R1OVcK3FxJqB2EHQoPnSdGqZQmQ0C4mnJHg5M-WJL9"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  MAR 24, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Cultural
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Main Quad Amphitheater
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  Spring Harmony: Annual Inter-College Musical Night
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  Featuring student orchestra ensembles, indie rock bands from neighboring colleges, and food trucks across the central lawn.
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">By Fine Arts Council</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Event Card 2: Robotics & AI Workshop -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="Robotics and Embedded AI Lab" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAH2J-RNuKoZvS70vlAloEVMHmecUBtb8A0D-0ttsb1kokehlOfzsnlJRuxHuHVCY2L3RygxPHnnZTQv33V8KnRo8YopgjBePnc3Z7cnpdpA3-yAHGnOh3xQQwrlTUfYT0TCKWOxn8p9eG1k4bop_Lkp87qMc5boy3DZN-izucSjz4TmEJxdI7KW1fZ3LrP1hxv0LdvEJCmJNC8LKXnmP3XZ3uyR6iLKxw2Bmd1fVr"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  MAR 27, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Workshop
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Engineering Wing, Lab 304
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  Autonomous Rovers: Edge AI &amp; ROS 2 Hands-On
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  Hands-on session using microcontrollers and computer vision modules. All hardware kits provided for team builds.
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">Robotics Club</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Event Card 3: Inter-Faculty Basketball -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="University Basketball Championship" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3JCQ9Yuee0YKl2zrL_nPyxFhh3a-blNpM4EcbBza2mXKJu_C6dNmWLXRSlXBS8U5bTis6MsIMKfEanGZx2JhZ8JzKQl80F_Izu6Zxh4aCRvtXCrfnw2JSOmiW1QvoGOpYNcefoFTIBsreGjfVmCCWi6QSu_Xx7sGyXvp4t6xP2pSbxCZ_YNTywQtwlyRY3BeKFPvjTiiWcNM35TaMNmAFWdTB74fthrwsm1_sVopT"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  APR 02, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-emerald-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Sports
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Varsity Sports Arena
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  March Madness Finale: Engineers vs. Business Titans
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  The ultimate championship showdown for the campus trophy. Cheerleaders, live DJ, and half-time student competitions.
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">Varsity Athletic Board</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Event Card 4: Career & Internship Fair -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="Spring Career Expo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwaKaJE3dmUHUz-nvCDliYObhLVc7Jvb6WJztS-3WiG1pq_dq-aMSfdalG9YGuegZXNbPmTA1ngqniD3iNJBD54q7hvsYe4we9PepsH8tRRnpWDtyI9cwkuWPvJ_j_-r6ebMahcinYs-lhX_l8uiIx4p4cTG3Rvm6liYS0sSBU9v2PJOSKB60DpiV6H-6xggugavOK-qkMTlMz-EwB9DGDBlJZW_aPPtHfu640eaWE"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  APR 08, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Career
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Grand Exhibition Center
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  Annual All-Disciplines Spring Career &amp; Co-op Expo
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  Meet recruiters from 80+ companies across technology, healthcare, finance, design, and non-profit sectors. Bring resumes!
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">Career Development Cell</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Event Card 5: Guest Lecture Series -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="Distinguished Speaker in Quantum Physics" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2v2biEEw8eQAqmzvCHQ3FmwFH1G4rpwt3K7C_mMAGUPP13E_-pGG9FwlWAL10exhSNi34VObGaPqinCyqgIf9Xi6dCTF5txU3jG04FfPoqLwV6UuhrWc7uuvuqsWhYVrhWBOm9kfWqA1yKp2SNZkv3E0mT9XyuTamgWPO0_x7R5Kb1jCp3NTX6rW3coQz_BWGhS79MdfuACxtLan4GrKLRQ-jO1rDwOK3BEJbMYdj"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  APR 14, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-indigo-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Lecture
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Turing Memorial Hall
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  Quantum Horizons: Computing Beyond Classical Silicon
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  Special talk with Dr. Sarah Jenkins, Senior Quantum Research Fellow at MIT, discussing fault-tolerant quantum algorithms.
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">Physics &amp; Math Society</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+<!-- Event Card 6: Eco-Campus Sustainability Drive -->
+<article class="event-card bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between" data-purpose="event-card-item">
+<div>
+<div class="relative h-48 w-full bg-slate-100 overflow-hidden">
+<img alt="Green Campus Sustainability Initiative" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsXWm4zmvECQXUHZGlDRlEuqFHhJuhtBmbVqx6_HC16ESESNuyI94OM0pFjjRepX23Cw-0z0KJkAu1cOuSBZbQLO3MNDsbRd_8I3JpBze-Lx16sVVumkJ4by-Z6xKRnJie9SAiT-IsiT_slyKZHLQWBp_kIVPC_ZDkwWvxGxS7iuUj3COB1PoAfDIlNkm3rOzzPWxc-8d5LJ4BoKZH227maDeO039L9MFOtzSo8nBi"/>
+<div class="absolute top-3 left-3 bg-white/95 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-slate-800 shadow-sm">
+                  APR 22, 2026
+                </div>
+<div class="absolute top-3 right-3 bg-teal-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                  Community
+                </div>
+</div>
+<div class="p-5">
+<div class="text-xs font-medium text-slate-600 mb-1 flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                  Botanical Gardens &amp; Arboretum
+                </div>
+<h3 class="text-base font-bold text-slate-900 hover:text-brand-600 transition-colors">
+                  Earth Week: Botanical Planting &amp; Zero-Waste Festival
+                </h3>
+<p class="text-xs text-slate-600 mt-2 line-clamp-2">
+                  Plant native campus trees, exchange pre-loved textbooks, and attend sustainable DIY lifestyle workshops. Refreshments included.
+                </p>
+</div>
+</div>
+<div class="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+<span class="text-slate-600 font-medium">Environmental Action Group</span>
+<a class="font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1" href="#">
+                View Details
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</article>
+</div>
+<!-- Load More Bar -->
+<div class="mt-12 text-center">
+<button class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors shadow-sm">
+<span>Load More Campus Events</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</section>
+<!-- END: EventCatalogSection -->
+<!-- BEGIN: AboutAndMetricsSection -->
+<!-- Lower wireframe section for About & Campus Engagement statistics -->
+<section class="py-16 bg-white border-t border-slate-200" data-purpose="about-metrics" id="about">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Left Text Column -->
+<div class="lg:col-span-6 space-y-4">
+<span class="text-xs uppercase tracking-wider font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-md">About UniPulse</span>
+<h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">The Central Nervous System for All Student Life</h2>
+<p class="text-slate-600 text-sm leading-relaxed">
+              UniPulse bridges the gap between academic faculty, registered student clubs, athletic leagues, and campus life coordinators. Our mission is to ensure every student finds their community, attends memorable events, and leads transformative campus initiatives.
+            </p>
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+<span class="block text-2xl font-black text-brand-600">80+</span>
+<span class="text-xs font-semibold text-slate-600">Registered Student Clubs</span>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+<span class="block text-2xl font-black text-brand-600">250+</span>
+<span class="text-xs font-semibold text-slate-600">Events Hosted Every Term</span>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+<span class="block text-2xl font-black text-brand-600">18,500+</span>
+<span class="text-xs font-semibold text-slate-600">Active Student Attendees</span>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+<span class="block text-2xl font-black text-brand-600">100%</span>
+<span class="text-xs font-semibold text-slate-600">Verified Campus Venues</span>
+</div>
+</div>
+</div>
+<!-- Right Callout Container for Club Officers -->
+<div class="lg:col-span-6 bg-gradient-to-br from-brand-900 to-indigo-950 p-8 rounded-2xl text-white shadow-xl relative overflow-hidden">
+<div class="relative z-10 space-y-4">
+<div class="w-12 h-12 rounded-xl bg-brand-500/30 border border-brand-400/40 flex items-center justify-center text-brand-300">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-2xl font-bold text-white">Organizing an official campus event?</h3>
+<p class="text-indigo-200 text-xs leading-relaxed">
+                Whether you're booking an auditorium, submitting catering requests, or organizing security approvals, UniPulse simplifies the administrative pipeline for all university-recognized student bodies.
+              </p>
+<div class="pt-2 flex flex-wrap gap-3">
+<a class="px-4 py-2.5 rounded-lg bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition-colors shadow" href="#event-guidelines">
+                  Organizer Guidelines
+                </a>
+<a class="px-4 py-2.5 rounded-lg bg-brand-800/80 hover:bg-brand-700 text-white font-medium text-xs border border-brand-500/30 transition-colors" href="#book-auditorium">
+                  Book Campus Facilities
+                </a>
+</div>
+</div>
+<!-- Decorative circle -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-brand-600/20 blur-2xl pointer-events-none"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: AboutAndMetricsSection -->
+</main>
+<!-- BEGIN: CampusFooter -->
+<!-- Comprehensive University Footer -->
+<footer class="bg-slate-900 text-slate-400 text-xs border-t border-slate-800" data-purpose="site-footer">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<!-- Brand Info -->
+<div class="col-span-2 md:col-span-1 space-y-3">
+<div class="flex items-center gap-2 text-white font-bold text-base">
+<div class="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center text-white text-xs">U</div>
+<span>UniPulse Hub</span>
+</div>
+<p class="text-xs text-slate-600 leading-normal">
+            The official event scheduling &amp; student engagement portal maintained by Student Affairs &amp; Campus Council.
+          </p>
+<div class="text-[11px] text-slate-600">
+            Emergency Security Desk: +1 (555) 019-2834
+          </div>
+</div>
+<!-- Quick Links -->
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider mb-3">Navigation</p>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#home">Home Showcase</a></li>
+<li><a class="hover:text-white transition-colors" href="#events">Upcoming Events</a></li>
+<li><a class="hover:text-white transition-colors" href="#calendar">Semester Calendar</a></li>
+<li><a class="hover:text-white transition-colors" href="#clubs">Clubs Directory</a></li>
+<li><a class="hover:text-white transition-colors" href="#about">About UniPulse</a></li>
+</ul>
+</div>
+<!-- Student Resources -->
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider mb-3">Resources</p>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#">Event Submission Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">AV &amp; Tech Gear Rentals</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Safety &amp; Crowd Protocol</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Food &amp; Catering Guidelines</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Accessibility Accommodations</a></li>
+</ul>
+</div>
+<!-- University Links -->
+<div>
+<p class="text-xs font-bold text-white uppercase tracking-wider mb-3">University Services</p>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="#">Office of Student Affairs</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Campus Recreation Center</a></li>
+<li><a class="hover:text-white transition-colors" href="#">University Library System</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Dining &amp; Student Union</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Campus Security &amp; Escorts</a></li>
+</ul>
+</div>
+</div>
+<!-- Footer Bottom Copyright Bar -->
+<div class="mt-12 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-600 gap-3">
+<p>© 2026 UniPulse Campus Events Hub. All rights reserved. University Division of Student Life.</p>
+<div class="flex items-center space-x-6">
+<a class="hover:text-slate-400" href="#">Student Code of Conduct</a>
+<a class="hover:text-slate-400" href="#">Privacy Policy</a>
+<a class="hover:text-slate-400" href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: CampusFooter -->
+</body></html>
