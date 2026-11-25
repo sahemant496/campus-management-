@@ -3,7 +3,7 @@
 import os
 from uuid import UUID
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from postgrest import APIError
 from supabase import Client, create_client
 
@@ -52,8 +52,22 @@ def api_error(error):
     return jsonify(error=getattr(error, "message", str(error))), status
 
 
+FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
+
+
 @app.get("/")
 def index():
+    if os.path.exists(os.path.join(FRONTEND_DIR, "index.html")):
+        return send_from_directory(FRONTEND_DIR, "index.html")
+    return jsonify(name="Events API", endpoints=[
+        "GET /api/events", "GET /api/events/<id>", "POST /api/registrations",
+        "GET /api/me/registrations?user_id=<uuid>",
+        "GET /api/events/<id>/registrations?organizer_id=<uuid>",
+    ])
+
+
+@app.get("/api")
+def api_index():
     return jsonify(name="Events API", endpoints=[
         "GET /api/events", "GET /api/events/<id>", "POST /api/registrations",
         "GET /api/me/registrations?user_id=<uuid>",
@@ -165,6 +179,13 @@ def event_registrations(event_id):
         return jsonify(result.data)
     except APIError as exc:
         return api_error(exc)
+
+
+@app.get("/<path:path>")
+def static_proxy(path):
+    if os.path.exists(os.path.join(FRONTEND_DIR, path)):
+        return send_from_directory(FRONTEND_DIR, path)
+    return jsonify(error="Not found"), 404
 
 
 if __name__ == "__main__":
