@@ -1,6 +1,12 @@
 .env
+.env.*
+!.env.example
 .venv/
 venv/
+**/venv/
+**/__pycache__/
 __pycache__/
 *.py[cod]
 .vercel/
+.DS_Store
+Thumbs.db
